@@ -18,6 +18,16 @@ The goal is to:
 2. Give advice to a used-car salesman, if he should buy a particular car to add to his stock (based on potential resale value)
 3. 
 ## How to Use
-(in progress)
-### 2. Via Streamlit app
-(in progress)
+1. clone repo
+2. `cd` into root of repo
+3. build a virtual environment via `venv` using the command: `python3 -m venv venv`
+4. activate virtual environment with: `source venv/bin/activate`
+5. load requirements with: `pip install -r requirements.txt`
+### Using the Streamlit app
+- run `streamlit run frontend/app.py` from the root of the repo
+### Running models and getting performance in the Terminal
+- run `python3 src/main.py`
+### Using Docker
+-  Follow steps 1-2
+-  Run in the terminal at the root of the repo: `docker build -t used-cars .` (might need `sudo` at the beginning)
+-  Run: `docker run -p 8501:8501 used-cars` (might need `sudo` at the beginning)
