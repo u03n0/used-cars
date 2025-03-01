@@ -23,9 +23,9 @@ Using the `terminal` run the following commands in a `directory` you want the re
 4. activate virtual environment with: `source venv/bin/activate`
 5. load requirements with: `pip install -r requirements.txt`
 ### Option 2: Use Pre-Built Docker Image
-- WIP
+- You can find the Docker Image [here](https://hub.docker.com/repository/docker/u03n0/used-cars/general)
 ### Option 3: Build Docker Image from Repo
--  Follow steps 1-2 from above.
+-  Follow steps 1-2 from above [Option 1: Download (Clone) Repo locally](#option-1).
 -  Ensure docker is running on your system.
 -  Run in the terminal at the root of the repo: `docker build -t used-cars .` (might need `sudo` at the beginning)
 -  Run: `docker run -p 8501:8501 used-cars` (might need `sudo` at the beginning)
@@ -46,8 +46,10 @@ Using the `terminal` run the following commands in a `directory` you want the re
 - - You can toggle your commission rate and expected profit margin.
 ### In Docker container
 - It should automatically direct you to the streamlit app
+- One model and Data already present.
+- You can run more models by opening another `terminal` session and running `sudo docker exec -it <docker_id> /bin/bash`.
+- From there, you can follow the steps from the section [Running models](#running-models)
+
 ## Available Models
 - `LinearRegression` via sklean as `src/lr_sklearn_pipeline.py`
 - `NeuralNetwork` via PyTorch (WIP)
-  
-
