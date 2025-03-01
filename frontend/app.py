@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 # Load pipeline and dataframe
-pipeline_path = Path("data/models")
+pipeline_path = Path("models")
 pipeline_file = [f for f in pipeline_path.glob("*.pkl")][0] #TODO grab all pkl so you can choose which model.
 dataset_path = Path("data/clean")
 csv_file = [f for f in dataset_path.glob("*.csv")][0]
