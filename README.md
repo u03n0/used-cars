@@ -1,4 +1,3 @@
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
@@ -10,16 +9,14 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-%23FE4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white)
 
 # Used Cars
-A look at used and new car sales.
+A look at used car sales.
 
 ## Goal
-The goal is to:
-1. Show a predicted used car price for a particular vehicle based on make, model, year, mileage, etc.
-2. Give advice to a used-car salesman, if he should buy a particular car to add to his stock (based on potential resale value)
-3. 
-## Downloading and Using
-### Option 1: Download (Clone) Repo locally
-Using the `Terminal` run the following commands in a `directory` you want the repo to be in.
+The goal is to predict the sales price of a used car, based on features (make, model, year, hp, fuel, gear type, etc.).
+   
+## Downloading and Using (Linux and Mac)
+### Option 1: Download (Clone) Repo locally 
+Using the `terminal` run the following commands in a `directory` you want the repo to be in.
 1. clone repo: `git clone git@github.com:u03n0/used-cars.git`
 2. `cd` into root of repo
 3. build a virtual environment via `venv` using the command: `python3 -m venv venv`
@@ -27,18 +24,30 @@ Using the `Terminal` run the following commands in a `directory` you want the re
 5. load requirements with: `pip install -r requirements.txt`
 ### Option 2: Use Pre-Built Docker Image
 - WIP
-## Running models and getting performance in the Terminal
-- after following either steps 1-5 or spinning up the pre-built docker image you have two choices:
-#### In local repo
-- run `python3 src/main.py`
-#### In Docker container
-- WIP
-## Using the Streamlit app
-### In local repo
-- run `streamlit run frontend/app.py` from the root of the repo
-### In Docker container
-- It should automatically direct you to the streamlit app
-### Using Docker (Requires building)
--  Follow steps 1-2
+### Option 3: Build Docker Image from Repo
+-  Follow steps 1-2 from above.
+-  Ensure docker is running on your system.
 -  Run in the terminal at the root of the repo: `docker build -t used-cars .` (might need `sudo` at the beginning)
 -  Run: `docker run -p 8501:8501 used-cars` (might need `sudo` at the beginning)
+## Running models
+- No data or model is present in the repo, you need to run a script to download and clean the data.
+- Run: `python3 scripts/download_data.py` to get clean data.
+- Once this is complete, you will now have a folder called `data/` which has both a raw and cleaned dataset.
+- Now you can choose which model to run (See below for which models are available)
+- To run the model(s) use this command in the terminal: `python3 src/<python_file.py>` (replace `<python_file.py>` with whichever `py` is in `src`.
+- You will now have a folder called `models/` and the score will be printed in the terminal.
+
+## Using the Streamlit app
+### In local repo
+- Once you've ran a model with the steps provided above, you can use the Streamlit app
+- run `streamlit run frontend/app.py` from the root of the repo.
+- Select `Sell Vehicle` to simulate you selling your car and you will get a predicted price for it.
+- Select `Buy Vehicle for Inventory` to simulate you as a sales agent who is deciding on what price to offer for a used car.
+- - You can toggle your commission rate and expected profit margin.
+### In Docker container
+- It should automatically direct you to the streamlit app
+## Available Models
+- `LinearRegression` via sklean as `src/lr_sklearn_pipeline.py`
+- `NeuralNetwork` via PyTorch (WIP)
+  
+
