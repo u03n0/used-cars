@@ -74,7 +74,7 @@ try:
             df[col] = df[col].str.lower()  # Lowercase text columns
         df['hp'] = df['hp'].apply(lambda x: int(x))  # Cast hp to int
         df = df.drop(columns=['offerType'])  # Drop the 'offerType' column
-        df.to_csv(clean_path / extracted_csv_path.stem)  # Save the cleaned data
+        df.to_csv(str(clean_path / extracted_csv_path.stem) + '.csv' , index=False)  # Save the cleaned data
         logging.info(f"Dataset cleaned successfully to {clean_path}.")
     except Exception as clean_exception:
         logging.error(f"Failed to clean dataset: {clean_exception}")
