@@ -1,5 +1,4 @@
 import joblib
-import kagglehub
 import logging
 import pandas as pd
 
@@ -22,12 +21,13 @@ logging.basicConfig(
 )
 
 
-df = pd.read_csv("data/data.csv")
+df = pd.read_csv("data/clean/autoscout24-germany-dataset.csv")
 
-X = df.drop(columns=['date_sold_new', 'car_age_sold_new', 'sale_price_used'])
-y = df['price_difference_sold_used']
 
-numeric_features = ['hp', 'used_mileage', 'year', 'sale_price_new']
+X = df.drop(columns=['price'])
+y = df['price']
+
+numeric_features = ['hp', 'mileage', 'year']
 numeric_transformer = StandardScaler()
 
 categorical_features = ['make', 'model', 'fuel', 'gear']
@@ -42,7 +42,7 @@ preprocessor = ColumnTransformer(
 
 pipeline = Pipeline(steps=[
     ('preprocessor', preprocessor),
-    ('regressor', LinearRegression())  # Change to SVM or other models as needed
+    ('regressor', LinearRegression())
 ])
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -54,6 +54,8 @@ pipeline.fit(X_train, y_train)
 score = pipeline.score(X_test, y_test)
 print(f"score: {score:,.2f}")
 logging.info(f"sklearn model score : {score:,.2f}")
-pipeline_path = 'data/models/sklearn_pipeline.pkl'
-joblib.dump(pipeline, pipeline_path)
-logging.info(f"Successfully saved sklearn pipline at {pipeline_path}")
+pipeline_dir = Path.cwd() / "models" # root folder + 'models' folder
+pipeline_dir.mkdir(parents=True, exist_ok=True)
+pipeline_full_path = pipeline_dir / 'sklearn_pipeline.pkl'
+joblib.dump(pipeline, pipeline_full_path)
+logging.info(f"Successfully saved sklearn pipline at {pipeline_full_path}")
