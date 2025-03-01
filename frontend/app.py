@@ -2,16 +2,25 @@ import streamlit as st
 import joblib
 import pandas as pd
 from datetime import date
+from pathlib import Path
 
 
 # Load pipeline and dataframe
-pipeline = joblib.load('data/models/pipeline.pkl')
-df = pd.read_csv("data/clean/autoscout24.csv")
+pipeline_path = Path("data/models")
+pipeline_file = [f for f in pipeline_path.glob("*.pkl")][0] #TODO grab all pkl so you can choose which model.
+dataset_path = Path("data/clean")
+csv_file = [f for f in dataset_path.glob("*.csv")][0]
+
+if csv_file and pipeline_file:
+    df = pd.read_csv(csv_file)
+    pipeline = joblib.load(pipeline_file)
+
 
 
 st.title(f'Used Car Price Prediction')
 user_options = ["Sell Vehicle", "Buy Vehicle for Inventory"]
 user = st.pills("What would you like to do?", user_options, selection_mode="single")
+
 
 if user:
     if user == "Buy Vehicle for Inventory":
