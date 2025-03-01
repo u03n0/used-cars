@@ -15,10 +15,10 @@ from sklearn.linear_model import LinearRegression
 log_path = Path.cwd() / "logs"  # root folder + 'logs' folder
 log_path.mkdir(parents=True, exist_ok=True)
 logging.basicConfig(
-    filename=log_path /'sklearn_model_log_file.log',  # Specify the log file name
-    level=logging.INFO,  # Log level (e.g., DEBUG, INFO, WARNING, etc.)
-    format='%(asctime)s - %(levelname)s - %(message)s',  # Log format
-    filemode='a'  # Append mode (default is 'a')
+    filename=log_path /'sklearn_model_log_file.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filemode='a'
 )
 
 
