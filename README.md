@@ -17,17 +17,28 @@ The goal is to:
 1. Show a predicted used car price for a particular vehicle based on make, model, year, mileage, etc.
 2. Give advice to a used-car salesman, if he should buy a particular car to add to his stock (based on potential resale value)
 3. 
-## How to Use
-1. clone repo
+## Downloading and Using
+### Option 1: Download (Clone) Repo locally
+Using the `Terminal` run the following commands in a `directory` you want the repo to be in.
+1. clone repo: `git clone git@github.com:u03n0/used-cars.git`
 2. `cd` into root of repo
 3. build a virtual environment via `venv` using the command: `python3 -m venv venv`
 4. activate virtual environment with: `source venv/bin/activate`
 5. load requirements with: `pip install -r requirements.txt`
-### Using the Streamlit app
-- run `streamlit run frontend/app.py` from the root of the repo
-### Running models and getting performance in the Terminal
+### Option 2: Use Pre-Built Docker Image
+- WIP
+## Running models and getting performance in the Terminal
+- after following either steps 1-5 or spinning up the pre-built docker image you have two choices:
+#### In local repo
 - run `python3 src/main.py`
-### Using Docker
+#### In Docker container
+- WIP
+## Using the Streamlit app
+### In local repo
+- run `streamlit run frontend/app.py` from the root of the repo
+### In Docker container
+- It should automatically direct you to the streamlit app
+### Using Docker (Requires building)
 -  Follow steps 1-2
 -  Run in the terminal at the root of the repo: `docker build -t used-cars .` (might need `sudo` at the beginning)
 -  Run: `docker run -p 8501:8501 used-cars` (might need `sudo` at the beginning)
