@@ -1,0 +1,22 @@
+# Ignore version control folders
+.git
+.github
+.gitlab
+
+# Ignore dependency directories
+node_modules
+vendor
+__pycache__
+*.pyc
+venv
+env
+
+# Ignore build artifacts
+dist
+build
+*.log
+
+# Ignore specific directories in your project
+data/
+logs/
+models/
