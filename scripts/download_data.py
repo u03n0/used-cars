@@ -59,6 +59,7 @@ try:
     # Now delete the zip file after extraction
     zip_file_path.unlink()  # Remove the zip file
     logging.info(f"Zip file {zip_file_path} removed.")
-    
+    subprocess.run(["python", str(Path.cwd() / "src" / "cleaning.py")], check=True)
+
 except Exception as e:
     logging.error(f"Failed to download or process dataset: {e}")
