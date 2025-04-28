@@ -39,22 +39,22 @@ if user:
     year_min =  min(car_years)
     year_max = max(car_years)
     year = st.number_input('Year', min_value=year_min, max_value=year_max, step=1)
-    hp_range = df[(df['make'] == car_make) & (df['model'] == car_model)]['hp'].unique().tolist()
-    hp_min =  min(hp_range)
-    hp_max = max(hp_range)
-    hp = st.number_input('Horsepower', min_value=hp_min, max_value=hp_max)
+    # hp_range = df[(df['make'] == car_make) & (df['model'] == car_model)]['hp'].unique().tolist()
+    # hp_min =  min(hp_range)
+    # hp_max = max(hp_range)
+    # hp = st.number_input('Horsepower', min_value=hp_min, max_value=hp_max)
     mileage = st.number_input('Mileage (in miles)', min_value=5000, max_value=500000, step=1000)
     fuel = st.selectbox('Fuel Type', df[(df['make'] == car_make) & (df['model'] == car_model)]['fuel'].unique().tolist())
-    gear = st.selectbox('Gear Type', df[(df['make'] == car_make) & (df['model'] == car_model)]['gear'].unique().tolist())
+    # gear = st.selectbox('Gear Type', df[(df['make'] == car_make) & (df['model'] == car_model)]['gear'].unique().tolist())
 
     data = {
         'make': car_make,
         'model': car_model,
         'year': year,
-        'hp': hp,
+        # 'hp': hp,
         'mileage': mileage,
         'fuel': fuel,
-        'gear': gear,
+        # 'gear': gear,
     }
     input_data = pd.DataFrame([data])
 

@@ -34,7 +34,7 @@ Using the `terminal` run the following commands in a `directory` you want the re
 - Run: `python3 scripts/download_data.py` to get clean data.
 - Once this is complete, you will now have a folder called `data/` which has both a raw and cleaned dataset.
 - Now you can choose which model to run (See below for which models are available)
-- To run the model(s) use this command in the terminal: `python3 src/<python_file.py>` (replace `<python_file.py>` with whichever `py` is in `src`.
+- To run the model(s) use this command in the terminal: `python3 src/<python_file.py>` replace `<python_file.py>` with whichever `py` is in `src`.
 - You will now have a folder called `models/` and the score will be printed in the terminal.
 
 ## Using the Streamlit app
