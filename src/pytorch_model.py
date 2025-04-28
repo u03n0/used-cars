@@ -4,23 +4,14 @@ import torch.optim as optim
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import pandas as pd
-import kagglehub
 
-# Download latest version
-# path = kagglehub.dataset_download("austinreese/craigslist-carstrucks-data")
 
-# print("Path to dataset files:", path)
-# Load your dataset
-used_car_sales = pd.read_csv('data/raw/autoscout24-germany-dataset.csv')
-text_columns = ['make', 'model', 'fuel']  # Update this list with all the columns that have text
-for col in text_columns:
-    used_car_sales[col] = used_car_sales[col].str.lower()
+df = pd.read_csv("data/clean/autoscout24-germany-dataset.csv")
 
-used_car_sales = used_car_sales.dropna()
 
-# Split data into features and target
-X = used_car_sales.drop(columns=['price', 'offerType'])  # Features
-y = used_car_sales['price']  # Target variable
+
+X = df.drop(columns=['price'])
+y = df['price']
 
 # Split data into training and validation sets (train first, then preprocess)
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -39,8 +30,8 @@ X_val = pd.get_dummies(X_val, columns=['make', 'model', 'fuel', 'gear'], drop_fi
 
 # Ensure both train and validation sets have the same columns after one-hot encoding
 X_train, X_val = X_train.align(X_val, join='left', axis=1, fill_value=0)
-X_train = X_train.astype('int32')
-X_val = X_val.astype('int32')
+# X_train = X_train.astype('int32')
+# X_val = X_val.astype('int32')
 # Convert data to PyTorch tensors
 X_train_tensor = torch.tensor(X_train.values, dtype=torch.float32)
 X_val_tensor = torch.tensor(X_val.values, dtype=torch.float32)
