@@ -8,7 +8,7 @@ from pathlib import Path
 # Load pipeline and dataframe
 pipeline_path = Path("models")
 pipeline_file = [f for f in pipeline_path.glob("*.pkl")][0] #TODO grab all pkl so you can choose which model.
-dataset_path = Path("data/clean")
+dataset_path = Path("data/interim")
 csv_file = [f for f in dataset_path.glob("*.csv")][0]
 
 if csv_file and pipeline_file:
@@ -34,27 +34,39 @@ if user:
     current_year = date.today().year
     car_make = st.selectbox('Car Make',makes)
     car_model = st.selectbox('Car Model', df[df['make'] == car_make]['model'].unique().tolist())
-
     car_years = df[(df['make'] == car_make) & (df['model'] == car_model)]['year'].unique().tolist()
     year_min =  min(car_years)
     year_max = max(car_years)
     year = st.number_input('Year', min_value=year_min, max_value=year_max, step=1)
-    # hp_range = df[(df['make'] == car_make) & (df['model'] == car_model)]['hp'].unique().tolist()
-    # hp_min =  min(hp_range)
-    # hp_max = max(hp_range)
-    # hp = st.number_input('Horsepower', min_value=hp_min, max_value=hp_max)
     mileage = st.number_input('Mileage (in miles)', min_value=5000, max_value=500000, step=1000)
     fuel = st.selectbox('Fuel Type', df[(df['make'] == car_make) & (df['model'] == car_model)]['fuel'].unique().tolist())
-    # gear = st.selectbox('Gear Type', df[(df['make'] == car_make) & (df['model'] == car_model)]['gear'].unique().tolist())
+    transmission = st.selectbox('Transmission Type', df[(df['make'] == car_make) & (df['model'] == car_model)]['transmission'].unique().tolist())
+    engine_capacity = st.selectbox('Engine Capacity', df[(df['make'] == car_make) & (df['model'] == car_model)]['engine_capacity'].unique().tolist())
+    drive_train = st.selectbox('Drivetrain Type', df[(df['make'] == car_make) & (df['model'] == car_model)]['drivetrain'].unique().tolist())
+    has_warranty = st.selectbox('Has Warrantt?', df[(df['make'] == car_make) & (df['model'] == car_model)]['has_warranty'].unique().tolist())
+    body_type = st.selectbox('Body Type', df[(df['make'] == car_make) & (df['model'] == car_model)]['body_type'].unique().tolist())
+    color = st.selectbox('Color', df[(df['make'] == car_make) & (df['model'] == car_model)]['color'].unique().tolist())
+
+    age = current_year - year
+    miles_per_year = mileage / age
+
+
 
     data = {
         'make': car_make,
         'model': car_model,
         'year': year,
-        # 'hp': hp,
         'mileage': mileage,
         'fuel': fuel,
-        # 'gear': gear,
+        'transmission': transmission,
+        'has_warranty': has_warranty,
+        'engine_capacity': engine_capacity,
+        'drivetrain': drive_train,
+        'miles_per_year': miles_per_year,
+        'body_type': body_type,
+        'age': age,
+        'color': color
+
     }
     input_data = pd.DataFrame([data])
 

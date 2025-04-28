@@ -8,7 +8,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 
 
 log_path = Path.cwd() / "logs"  # root folder + 'logs' folder
@@ -21,16 +21,16 @@ logging.basicConfig(
 )
 
 
-df = pd.read_csv("data/clean/autoscout24-germany-dataset.csv")
+df = pd.read_csv("data/interim/cars.csv")
 
 
-X = df.drop(columns=['price'])
+X = df.drop(columns=['price', 'price_per_mile', 'price_per_year'])
 y = df['price']
 
-numeric_features = ['hp', 'mileage', 'year']
+numeric_features = ['mileage', 'year', 'engine_capacity', 'age', 'miles_per_year']
 numeric_transformer = StandardScaler()
 
-categorical_features = ['make', 'model', 'fuel', 'gear']
+categorical_features = ['make', 'model', 'transmission', 'color', 'fuel', 'body_type', 'drivetrain', 'has_warranty']
 categorical_transformer = OneHotEncoder(drop='first', handle_unknown='ignore')
 
 preprocessor = ColumnTransformer(
@@ -42,7 +42,7 @@ preprocessor = ColumnTransformer(
 
 pipeline = Pipeline(steps=[
     ('preprocessor', preprocessor),
-    ('regressor', LinearRegression())
+    ('regressor', RandomForestRegressor())
 ])
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
