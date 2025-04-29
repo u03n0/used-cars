@@ -29,27 +29,16 @@ Using the `terminal` run the following commands in a `directory` you want the re
 -  Ensure docker is running on your system.
 -  Run in the terminal at the root of the repo: `docker build -t used-cars .` (might need `sudo` at the beginning)
 -  Run: `docker run -p 8501:8501 used-cars` (might need `sudo` at the beginning)
-## Running models
+## Running Program
 - No data or model is present in the repo, you need to run a script to download and clean the data.
-- Run: `python3 scripts/download_data.py` to get clean data.
-- Once this is complete, you will now have a folder called `data/` which has both a raw and cleaned dataset.
-- Now you can choose which model to run (See below for which models are available)
-- To run the model(s) use this command in the terminal: `python3 src/<python_file.py>` replace `<python_file.py>` with whichever `py` is in `src`.
-- You will now have a folder called `models/` and the score will be printed in the terminal.
+- Run: `python3 src/main.py` to automatically download the dataset, clean it, and train a model.
+- Once this is complete, you will now have a folder called `data/` which has both a raw and cleaned dataset, `logs/`, and `models/`.
 
 ## Using the Streamlit app
 ### In local repo
-- Once you've ran a model with the steps provided above, you can use the Streamlit app
+- Once you've ran a `src/main.py` with the steps provided above, you can use the Streamlit app
 - run `streamlit run frontend/app.py` from the root of the repo.
 - Select `Sell Vehicle` to simulate you selling your car and you will get a predicted price for it.
 - Select `Buy Vehicle for Inventory` to simulate you as a sales agent who is deciding on what price to offer for a used car.
 - - You can toggle your commission rate and expected profit margin.
-### In Docker container
-- It should automatically direct you to the streamlit app
-- One model and Data already present.
-- You can run more models by opening another `terminal` session and running `sudo docker exec -it <docker_id> /bin/bash`.
-- From there, you can follow the steps from the section [Running models](#running-models)
 
-## Available Models
-- `LinearRegression` via sklean as `src/lr_sklearn_pipeline.py`
-- `NeuralNetwork` via PyTorch (WIP)
