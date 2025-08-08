@@ -13,7 +13,7 @@ A look at used car sales.
 
 ## Goal
 The goal is to predict the sales price of a used car, based on features (make, model, year, hp, fuel, gear type, etc.).
-   
+## Features
 ## Downloading and Using (Linux and Mac)
 ### Option 1: Download (Clone) Repo locally 
 Using the `terminal` run the following commands in a `directory` you want the repo to be in.
