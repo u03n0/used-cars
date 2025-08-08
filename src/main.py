@@ -21,6 +21,7 @@ logging.info("Starting main pipeline execution")
 project_root = Path(__file__).parent.parent
 raw_data_path = project_root / "data" / "raw" / "cars.csv"
 clean_data_path = project_root / "data" / "clean" / "cars.csv"
+interim_data_path = project_root / "data" / "interim" / "cars.csv"
 models_dir = project_root / "models"
 
 #  Check if raw data exists, if not download it
@@ -36,6 +37,13 @@ if not clean_data_path.exists():
     subprocess.run(["python", str(Path.cwd() / "src" / "cleaning.py")], check=True)
 else:
     logging.info(f"Clean data already exists at {clean_data_path}")
+
+# Check if interim data exists, if not engineer features for the data
+if not interim_data_path.exists():
+    logging.info("Interim data not found. Running feature engineering script.")
+    subprocess.run(["python", str(Path.cwd() / "src" / "features.py")], check=True)
+else:
+    logging.info(f"Interim data already exists at {interim_data_path}")
 
 # Check if model files exist, if not train models
 pkl_files = list(models_dir.glob("*.pkl"))
